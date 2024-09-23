@@ -1,0 +1,127 @@
+[
+    {
+        "name": "Unión Democrata Independiente",
+        "name_short": "UDI",
+        "ideology": "Derecha"
+    },
+    {
+        "name": "Renovacion Nacional",
+        "name_short": "RN",
+        "ideology": "Derecha"
+    },
+    {
+        "name": "Partido Socialista de Chile",
+        "name_short": "PS",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Partido por la Democracia",
+        "name_short": "PPD",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Partido Democrata Cristiano",
+        "name_short": "PDC",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Partido Comunista de Chile",
+        "name_short": "PC",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Democratas",
+        "name_short": "D",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Evolucion Politica",
+        "name_short": "EVOP",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Partido Republicano de Chile",
+        "name_short": "PLR",
+        "ideology": "Derecha"
+    },
+    {
+        "name": "Revolucion Democratica",
+        "name_short": "RD",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Convergencia Social",
+        "name_short": "CS",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Comunes",
+        "name_short": "-",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Partido de la Gente",
+        "name_short": "PDG",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Partido Radical de Chile",
+        "name_short": "-",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Partido Social Cristiano",
+        "name_short": "PSC",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Partido Liberal de Chile",
+        "name_short": "PL",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Acción Humanista",
+        "name_short": "AH",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Movimiento Amarillos por Chile",
+        "name_short": "-",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Partido Humanista",
+        "name_short": "PH",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Igualdad",
+        "name_short": "PI",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Popular",
+        "name_short": "-",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Partido Alianza Verde Popular",
+        "name_short": "PAVP",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Patria Progresista",
+        "name_short": "PP",
+        "ideology": "Izquierda"
+    },
+    {
+        "name": "Sentido Común",
+        "name_short": "SC",
+        "ideology": "Centro"
+    },
+    {
+        "name": "Frente Amplio",
+        "name_short": "FA",
+        "ideology": "Izquierda"
+    }
+]

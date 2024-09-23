@@ -1,0 +1,20 @@
+hr {
+    margin: 16px 0;
+    height: 2px;
+    background-color: rgb(110 110 110);
+}
+
+.about-content {
+    padding: 16px;
+    background-color: var(--clr-white);
+    border: 1px solid var(--clr-gray);
+    border-top: 0;
+}
+
+.about-title {
+    margin-bottom: 8px;
+}
+
+.about-description {
+    margin-top: 24px;
+}

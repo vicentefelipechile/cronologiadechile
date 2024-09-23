@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://cronologiadechile.pages.dev/favico.ico">
+
+    <!-- Primary Meta Tags -->
+    <title>Linea Cronológica de chile</title>
+    <meta name="title" content="Linea Cronologica de chile" />
+    <meta name="description" content="Esta pagina es una linea temporal de la mayoria de los eventos que ocurren en chile desde el año 2020 (o antes) hasta el dia de hoy" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cronologiadechile.pages.dev/" />
+    <meta property="og:title" content="Linea Cronologica de chile" />
+    <meta property="og:description" content="Esta pagina es una linea temporal de la mayoria de los eventos que ocurren en chile desde el año 2020 (o antes) hasta el dia de hoy" />
+    <meta property="og:image" content="https://cronologiadechile.pages.dev/src/img/banner.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:creator" content="@UltimatusVirsus" />
+    <meta property="twitter:url" content="https://cronologiadechile.pages.dev/" />
+    <meta property="twitter:title" content="Linea Cronologica de chile" />
+    <meta property="twitter:description" content="Esta pagina es una linea temporal de la mayoria de los eventos que ocurren en chile desde el año 2020 (o antes) hasta el dia de hoy" />
+    <meta property="twitter:image" content="https://cronologiadechile.pages.dev/src/img/banner.png" />
+
+    <!-- Meta Tags Generated with https://metatags.io -->
+
+    <link href="https://unpkg.com/vis-timeline@7.7.3/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/vis-timeline@7.7.3/standalone/umd/vis-timeline-graph2d.min.js"></script>
+
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <link rel="stylesheet" href="/src/css/article.css">
+    <link rel="stylesheet" href="/src/css/sidebar.css">
+</head>
+<body>
+    <div class="main-content">
+
+
+        <!-- HEADER -->
+        <header class="style">
+            <div id="header" class="header">
+                <h1 class="header-item">
+                    <a class="header-link" href="/">Linea cronologica de Chile</a>
+                </h1>
+                <div id="about" class="header-item">
+                    <a class="header-link" href="/about.html">Sobre esta pagina</a>
+                </div>
+                <div id="about" class="header-item">
+                    <a class="header-link" href="/fuentes.html">Buscar fuentes</a>
+                </div>
+            </div>
+            <div class="dark-theme">
+                <button id="dark-theme-button" onclick='alert("Lamentablemente esto no sirve y no se como hacerlo funcionar.")'>
+                    <img src="/src/img/dark-theme.svg" alt="Dark Theme" class="dark-theme">
+                </button>
+            </div>
+        </header>
+        <!-- HEADER -->
+
+
+        <div id="last-update" class="separator border">...</div>
+        <div class="body-content border">
+            <div class="body-article border">
+                <div class="sub-header background-white">
+                    <div class="separator border-only"></div>
+                    <div class="inner-content">Linea cronologica</div>
+                    <div class="separator border-only"></div>
+                </div>
+
+                <div class="timeline border background-white" id="timeline"></div>
+
+                <div id="timeline-title" class="body-article-title background-white">Informacion</div>
+                <div class="body-article-info background-white">
+                    <div id="timeline-author">Por vicentefelipechile</div>
+                    <div id="timeline-date"></div>
+                </div>
+                <div id="timeline-description" class="body-article-description background-white deny-white-space">
+                    <img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fhits.dwyl.com%2Fvicentefelipechile%2Fchile.json&amp;style=plastic&amp;logo=curl&amp;label=Visitantes&amp;color=blue">
+                    <br>
+                    Esta pagina muestra la linea cronologica de todos los eventos asociados de Chile desde 2020 hasta la actualidad. Ten encuenta que esta informacion puede estar desactualizada o ser incorrecta. De ser asi, por favor hazme una mencion en Twitter (<a href="https://twitter.com/UltimatusVirsus">@UltimatusVirsus</a>) para corregirlo.
+                    <br>
+                    <h1>Partidos politicos</h1>
+                    <ul class="mono-font" id="partidos-politicos"></ul>
+                </div>
+                <div id="timeline-source" class="body-article-source background-white">
+                    <ul>
+                        <li><a href="https://es.wikipedia.org/wiki/Partidos_políticos_de_Chile">https://es.wikipedia.org/wiki/Partidos_políticos_de_Chile</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="body-sidebar border">
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">Ultimos Articulos</div>
+                    <hr>
+                    <div id="sidebar-articles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/src/js/partidos-politicos.js"></script>
+    <script src="/src/js/timeline.js"></script>
+</body>
+</html>
