@@ -1,6 +1,5 @@
 .sidebar-item {
     padding: 6px;
-    width: 30%;
     border: 1px solid var(--clr-gray);
 }
 
@@ -21,6 +20,7 @@
     border-bottom: 0;
     */
 }
+
 .sidebar-item-subitem-title {
     cursor: pointer;
 }
@@ -39,7 +39,4 @@
         width: inherit;
     }
 
-    .sidebar-item {
-        width: calc(100% - 30px);
-    }
 }

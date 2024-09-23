@@ -52,6 +52,12 @@ a {
     cursor: pointer;
 }
 
+article {
+    background: white;
+    border: var(--border);
+    border-top: 0;
+}
+
 hr {
     border: 0;
     height: 1px;
@@ -78,6 +84,11 @@ img.dark-theme {
 ul.mono-font {
     font-family: "JetBrainsMono", monospace;
     white-space: normal;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 li {
@@ -102,9 +113,17 @@ li:last-child {
 }
 
 .body-article {
-    width: -webkit-fill-available;
+    width: 80%;
     margin: 10px;
     background-color: var(--clr-whitegray);
+}
+
+.sidebar-item {
+    width: 20%;
+
+    @media screen and (max-width: 928px) {
+        width: 100%;
+    }
 }
 
 .background-white {
@@ -206,8 +225,20 @@ div.header-item {
 
 .timeline {
     height: 480px;
-    border: var(--border);
     border-top: 0;
+}
+
+.timeline-content {
+    width: 100%;
+    display: flex;
+}
+
+.timeline-tags {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    position: relative;
+    height: 0;
 }
 
 @media screen and (max-width: 928px) {

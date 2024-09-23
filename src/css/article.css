@@ -8,18 +8,16 @@
 
 .body-article-title {
     padding: 20px;
+    padding-top: 4px;
     padding-bottom: 10px;
     font-size: 1.5em;
     font-weight: bold;
-    border-left: var(--border);
-    border-right: var(--border);
 }
 
 .body-article-info {
+    padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
-    border-left: var(--border);
-    border-right: var(--border);
 
     display: flex;
     justify-content: space-between;
@@ -29,8 +27,6 @@
     padding: 20px;
     padding-bottom: 6px;
     font-size: 1em;
-    border-left: var(--border);
-    border-right: var(--border);
 
     min-width: 0;
     white-space: pre-wrap;
@@ -43,7 +39,6 @@
 .body-article-source {
     padding: 20px;
     font-size: 0.8em;
-    border: var(--border);
     border-top: 1px;
     padding-top: 1px;
 }
