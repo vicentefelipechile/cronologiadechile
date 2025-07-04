@@ -41,7 +41,7 @@ const GetData = (async () => {
         return { articles: CacheData, info: CacheInfo }
     }
 
-    const Response = await fetch("https://pub-8894ff44a6f3423591cf59b2b272f41b.r2.dev/cronograma.json")
+    const Response = await fetch("/api/articles")
 
     if (Response.ok) {
         All = await Response.json()
@@ -110,34 +110,43 @@ const ShowLastArticles = async (amount) => {
 }
 
 const ShowArticle = (id) => {
-    const Article = CacheData[id]
+    const Article = CacheData[id];
+    const converter = new showdown.Converter();
 
-    TimelineTitle.textContent = Article.title
-    TimelineAuthor.textContent = "Por " + Article.author
-    TimelineDate.textContent = CreateDate(Article.date)
+    TimelineTitle.textContent = Article.title;
+    TimelineAuthor.textContent = "Por " + Article.author;
+    TimelineDate.textContent = CreateDate(Article.date);
 
-    TimelineDescription.classList.remove("deny-white-space")
+    TimelineDescription.classList.remove("deny-white-space");
 
-    TimelineDescription.innerHTML = `<a class="permalink" href=https://cronologiadechile.pages.dev/#` + id + `>Obtener enlace permanente</a><br><br>` + Article.description
+    let descriptionHtml = '';
+    if (Article.description.startsWith('![M]')) {
+        const markdownContent = Article.description.substring(4);
+        descriptionHtml = converter.makeHtml(markdownContent);
+    } else {
+        descriptionHtml = Article.description;
+    }
+
+    TimelineDescription.innerHTML = `<a class="permalink" href=https://cronologiadechile.pages.dev/#${id}>Obtener enlace permanente</a><br><br>${descriptionHtml}`;
 
     // Set source
-    TimelineSource.innerHTML = ""
+    TimelineSource.innerHTML = "";
 
-    const unordenedList = document.createElement("ol")
+    const unordenedList = document.createElement("ol");
 
     Article.source.forEach((LinkSource) => {
-        const ListItem = document.createElement("li")
-        const Link = document.createElement("a")
+        const ListItem = document.createElement("li");
+        const Link = document.createElement("a");
 
-        LinkText = document.createTextNode(LinkSource)
-        Link.appendChild(LinkText)
-        Link.href = LinkSource
-        ListItem.appendChild(Link)
-        unordenedList.appendChild(ListItem)
-    })
+        LinkText = document.createTextNode(LinkSource);
+        Link.appendChild(LinkText);
+        Link.href = LinkSource;
+        ListItem.appendChild(Link);
+        unordenedList.appendChild(ListItem);
+    });
 
-    TimelineSource.appendChild(unordenedList)
-}
+    TimelineSource.appendChild(unordenedList);
+};
 
 
 document.addEventListener("DOMContentLoaded", async function() {

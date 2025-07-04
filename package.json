@@ -1,0 +1,34 @@
+{
+  "name": "cronologiadechile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:cf": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "migrate": "node migrate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vicentefelipechile/cronologiadechile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vicentefelipechile/cronologiadechile/issues"
+  },
+  "homepage": "https://github.com/vicentefelipechile/cronologiadechile#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "http-proxy-middleware": "^3.0.5"
+  },
+  "devDependencies": {
+    "wrangler": "^4.22.0"
+  }
+}

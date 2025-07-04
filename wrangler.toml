@@ -1,0 +1,7 @@
+name = "cronologiadechile-api"
+main = "api/index.js"
+compatibility_date = "2023-10-30"
+
+[[kv_namespaces]]
+binding = "ARTICLES"
+id = "1e50eb57847947cabb3625da898a6b70"

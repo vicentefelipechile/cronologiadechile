@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Nuevo Artículo - Cronología de Chile</title>
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <link rel="stylesheet" href="/src/css/article.css"> 
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Añadir Nuevo Artículo</h1>
+            <p><a href="/">Volver a la cronología</a> | <a href="#" id="logout-button">Cerrar sesión</a></p>
+        </header>
+        <main>
+            <form id="add-article-form">
+                <input type="hidden" id="id" name="id">
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Fecha (YYYY-MM-DD)</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Autor</label>
+                    <input type="text" id="author" name="author" value="vicentefelipechile" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripción (Markdown)</label>
+                    <textarea id="description" name="description" rows="10" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="source">Fuentes (una URL por línea)</label>
+                    <textarea id="source" name="source" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Etiquetas (separadas por comas)</label>
+                    <input type="text" id="tags" name="tags">
+                </div>
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <button type="submit" class="button" id="submit-button">Añadir Artículo</button>
+                    <button type="button" class="button" id="cancel-edit-button" style="display:none;">Cancelar Edición</button>
+                    <button type="button" class="button" id="manage-articles-button">Gestionar Artículos</button>
+                </div>
+            </form>
+
+            <!-- Modal Structure -->
+            <div id="articles-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <h2>Gestionar Artículos</h2>
+                    <input type="text" id="article-search" placeholder="Buscar artículo por título..." class="form-group">
+
+                    <div id="modal-articles-list" class="articles-list-in-modal"></div>
+                </div>
+            </div>
+            <div id="response-message"></div>
+
+            <div class="preview-section">
+                <h2 id="preview-article-title">Vista Previa del Artículo</h2>
+                <div id="preview-content" class="article-content"></div>
+            </div>
+
+            <div class="preview-section">
+                <h2>Vista Previa de las Fuentes</h2>
+                <div id="preview-sources" class="article-sources"></div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+            document.getElementById('date').value = formattedDate;
+        });
+    </script>
+    <script src="/src/js/admin.js"></script>
+</body>
+</html>
