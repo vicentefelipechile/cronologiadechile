@@ -158,9 +158,10 @@ document.addEventListener("DOMContentLoaded", async function() {
     VisTimeline = new vis.Timeline(MainTimeline, items, options)
 
     let All = await GetData()
-    let Data = All["articles"], Info = All["info"]
+    let Data = All["articles"]
+    let Info = All["info"]
 
-    LastUpdate.textContent = "Última actualización: " + CreateDate(Info["last_update"])
+    LastUpdate.textContent = "Última actualización: " + CreateDate(Info["last_update"]) + " por " + Info["last_author"]
 
     Data = Data.map((item, index) => {
         item.id = index

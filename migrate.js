@@ -1,44 +1,60 @@
-
 const fs = require('fs').promises;
 const path = require('path');
 
-// Function to create a slug from a string
-function slugify(text) {
-  return text.toString().toLowerCase()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-    .replace(/^-+/, '')             // Trim - from start of text
-    .replace(/-+$/, '');            // Trim - from end of text
+async function clearKV() {
+    try {
+        const response = await fetch('http://127.0.0.1:8787/api/articles');
+        if (response.ok) {
+            const data = await response.json();
+            const articles = data.articles;
+
+            for (const article of articles) {
+                const deleteResponse = await fetch(`http://127.0.0.1:8787/api/articles/${article.key}`, {
+                    method: 'DELETE',
+                });
+
+                if (deleteResponse.ok) {
+                    console.log(`Article with key '${article.key}' deleted successfully.`);
+                } else {
+                    console.error(`Failed to delete article with key '${article.key}'. Status: ${deleteResponse.status}`);
+                }
+            }
+        } else {
+            console.error('Failed to fetch data for clearing KV:', response.status, await response.text());
+        }
+    } catch (error) {
+        console.error('Error clearing KV:', error);
+    }
 }
 
 async function migrateArticles() {
   try {
+    await clearKV();
+
     const filePath = path.join(__dirname, 'cronograma.json');
     const data = await fs.readFile(filePath, 'utf8');
     const cronograma = JSON.parse(data);
     const articles = cronograma.articles;
 
-    // The default address for a local Wrangler development server is http://127.0.0.1:8787
     const endpoint = 'http://127.0.0.1:8787/api/articles';
 
     console.log(`Starting migration of ${articles.length} articles to ${endpoint}...`);
 
-    for (const article of articles) {
-      // Create a unique key for each article
-      const key = `${slugify(article.title)}-${article.date}`;
+    for (let i = 0; i < articles.length; i++) {
+      const article = articles[i];
+      const key = (i + 1).toString();
       const value = JSON.stringify(article);
 
-      const response = await fetch(endpoint, {
+      const response = await fetch(`${endpoint}/${key}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ key, value }),
+        body: JSON.stringify({ value }),
       });
 
       if (response.ok) {
-        console.log(`Article '${article.title}' migrated successfully.`);
+        console.log(`Article '${article.title}' migrated successfully with key ${key}.`);
       } else {
         console.error(`Failed to migrate article '${article.title}'. Status: ${response.status}`);
         const responseBody = await response.text();

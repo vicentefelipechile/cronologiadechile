@@ -21,17 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const converter = new showdown.Converter();
 
     let allArticles = []; // To store all fetched articles
-    editingArticleKey = null; // To store the key of the article being edited
-
-    // Function to create a slug from a string
-    function slugify(text) {
-        return text.toString().toLowerCase()
-            .replace(/\s+/g, '-')           // Replace spaces with -
-            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-            .replace(/^-+/, '')             // Trim - from start of text
-            .replace(/-+$/, '');            // Trim - from end of text
-    }
+    let editingArticleKey = null; // To store the key of the article being edited
 
     // Function to update preview
     function updatePreview(title, description, sources) {
@@ -186,17 +176,16 @@ document.addEventListener('DOMContentLoaded', function () {
             tags: formData.get('tags').split(',').map(tag => tag.trim()),
         };
 
-        const isUpdating = editingArticleKey === null;
+        const isEditing = editingArticleKey !== null;
         let key;
-        let method;
-        let url;
+        const method = 'POST'; // Always use POST
+        let url = window.location.origin; // Use the current origin
         let body;
 
-        if (isUpdating) {
+        if (isEditing) {
             key = editingArticleKey;
-            method = 'PUT';
-            url = `/api/articles/${key}`;
-            body = JSON.stringify({ value: article }); // Send the article object directly
+            url = `${url}/api/articles/${key}`;
+            body = JSON.stringify({ value: article }); // Send only the value for updates
         } else {
             const maxKey = allArticles.reduce((max, art) => {
                 const currentKey = parseInt(art.key, 10);
@@ -204,16 +193,19 @@ document.addEventListener('DOMContentLoaded', function () {
             }, -1);
             
             key = (maxKey + 1).toString();
-            method = 'POST';
-            url = '/api/articles';
-            body = JSON.stringify({ key: key, value: article }); // Send key and article object
+            url = `${url}/api/articles/${key}`;
+            body = JSON.stringify({ key: key, value: article }); // Send key and value for creations
         }
 
-        console.log(`Submitting article with key: ${key}, method: ${method}, url: ${url}`);
+        submitButton.classList.add('loading');
+        submitButton.disabled = true;
+        cancelEditButton.disabled = true;
+        manageArticlesButton.disabled = true;
+        responseMessage.style.display = 'none';
 
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 5 * 1000); // 10 seconds timeout
+            const timeoutId = setTimeout(() => controller.abort("Time out"), 5 * 1000); // 10 seconds timeout
 
             const response = await fetch(url, {
                 method: method,
@@ -228,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             responseMessage.style.display = 'block';
             if (response.ok) {
-                responseMessage.textContent = `¡Artículo ${isUpdating ? 'actualizado' : 'añadido'} con éxito!`;
+                responseMessage.textContent = `¡Artículo ${isEditing ? 'actualizado' : 'añadido'} con éxito!`;
                 responseMessage.className = 'response-message success';
                 form.reset();
                 editingArticleKey = null; // Reset editing state
@@ -238,13 +230,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 fetchArticles(); // Refresh the list in the modal
             } else {
                 const errorText = await response.text();
-                responseMessage.textContent = `Error al ${isUpdating ? 'actualizar' : 'añadir'} el artículo: ${errorText}`;
+                responseMessage.textContent = `Error al ${isEditing ? 'actualizar' : 'añadir'} el artículo: ${errorText}`;
                 responseMessage.className = 'response-message error';
+                console.error(`Error ${isEditing ? 'updating' : 'adding'} article:`, errorText);
             }
         } catch (error) {
             responseMessage.style.display = 'block';
-            responseMessage.textContent = `Error de red: ${error.message}`;
+            responseMessage.textContent = `Error de red: ${error}`;
             responseMessage.className = 'response-message error';
+            console.error('Error submitting article:', error);
+        } finally {
+            submitButton.classList.remove('loading');
+            submitButton.disabled = false;
+            cancelEditButton.disabled = false;
+            manageArticlesButton.disabled = false;
         }
     });
 
